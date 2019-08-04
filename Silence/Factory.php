@@ -18,4 +18,19 @@ class Factory
         Register::set('mysqlDB', $db);
         return $db;
     }
+
+    static function getUser($id)
+    {
+        $key = 'user_' . $id;
+        $user = Register::get($key);
+
+        if (!$user) {
+            $user = new UserORM($id);
+            Register::set($key, $user);
+        }
+
+        return $user;
+    }
+
+
 }
